@@ -14,7 +14,9 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      isHovered: false
+      isHovered: false,
+      currentTime: 0,
+      duration: album.songs[0].duration,
     };
 
     this.audioElement = document.createElement('audio');
@@ -29,6 +31,25 @@ class Album extends Component {
   pause() {
     this.audioElement.pause();
     this.setState({ isPlaying: false });
+  }
+
+  componentDidMount() {
+    this.eventListeners = {
+      timeupdate: e => {
+        this.setState({ currentTime: this.audioElement.currentTime });
+      },
+      durationchange: e => {
+        this.setState({ duration: this.audioElement.duration });
+      }
+    };
+    this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
+    this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+  }
+
+  componentWillUnmount() {
+    this.audioElement.src = null;
+    this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
+    this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
   }
 
   setSong(song) {
@@ -71,6 +92,25 @@ class Album extends Component {
     }
   }
 
+  handleTimeChange(e) {
+    const newTime = this.audioElement.duration * e.target.value;
+    this.audioElement.currentTime = newTime;
+    this.setState({ currentTime: newTime });
+  }
+
+  formatTime(timeInSeconds) {
+    timeInSeconds = Number(timeInSeconds);
+    const timeInMinutes = Math.floor(timeInSeconds/60);
+    const remainingSeconds = Math.floor(timeInSeconds%60);
+    if (typeof timeInSeconds !== 'number') {
+      return "--:--"
+    } else if (remainingSeconds < 10) {
+        return `${(timeInMinutes)}:0${(remainingSeconds)}`
+    }
+    else
+     return `${(timeInMinutes)}:${(remainingSeconds)}`
+  }
+
   render() {
     return (
       <section className="album">
@@ -108,7 +148,7 @@ class Album extends Component {
 
                 </td>
               <td className="song-title">{song.title}</td>
-              <td className="song-duration">{song.duration}</td>
+              <td className="song-duration">{this.formatTime(song.duration)}</td>
             </tr>
           )}
         </tbody>
@@ -116,9 +156,13 @@ class Album extends Component {
         <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
+          currentTime={this.audioElement.currentTime}
+          duration={this.audioElement.duration}
+          formatTime={(timeInSeconds) => this.formatTime(timeInSeconds)}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={ () => this.handleNextClick()}
+          handleTimeChange={(e) => this.handleTimeChange(e)}
         />
       </section>
     );
