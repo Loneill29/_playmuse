@@ -23,3 +23,11 @@ h1 {
   text-align: center;
   padding-bottom: 30px;
 }
+
+.library .album-title {
+  margin-top: 10px;
+}
+
+.library .album-pic {
+  margin-top: 30px;
+}

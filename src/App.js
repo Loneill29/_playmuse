@@ -13,14 +13,13 @@ class App extends Component {
           <nav>
             <Link className="nav-link" to='/'>Home</Link>
             <Link className="nav-link" to='/library'>Library</Link>
-            <Link className="nav-link" to='/album'>Album</Link>
           </nav>
           <h1>P L A Y M U S E</h1>
         </header>
         <main>
           <Route exact path="/" component={Landing} />
           <Route path="/library" component={Library} />
-          <Route path="/album" component={Album} />
+          <Route path="/album/:slug" component={Album} />
         </main>
       </div>
     );
