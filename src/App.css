@@ -31,3 +31,12 @@ h1 {
 .library .album-pic {
   margin-top: 30px;
 }
+
+#song-list {
+  padding-top: 50px;
+  padding-left: 150px;
+}
+
+#album-cover-art {
+  float: left;
+}

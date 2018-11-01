@@ -4,9 +4,9 @@ import albumData from './../data/albums';
 
 class Library extends Component {
   constructor(props) {
-  super(props);
-  this.state = { albums: albumData };
-}
+    super(props);
+      this.state = { albums: albumData };
+  }
 
   render() {
    return (
