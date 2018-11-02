@@ -17,10 +17,12 @@ class Album extends Component {
       isHovered: false,
       currentTime: 0,
       duration: album.songs[0].duration,
+      currentVolume: 0.8
     };
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    this.audioElement.volume = 0.8;
   }
 
   play() {
@@ -98,12 +100,18 @@ class Album extends Component {
     this.setState({ currentTime: newTime });
   }
 
+  handleVolumeChange(e) {
+    const newVolume = e.target.value;
+    this.audioElement.volume = newVolume;
+    this.setState({currentVolume: newVolume});
+  }
+
   formatTime(timeInSeconds) {
     timeInSeconds = Number(timeInSeconds);
     const timeInMinutes = Math.floor(timeInSeconds/60);
     const remainingSeconds = Math.floor(timeInSeconds%60);
-    if (typeof timeInSeconds !== 'number') {
-      return "--:--"
+    if (isNaN(timeInMinutes)) {
+      return "-:--";
     } else if (remainingSeconds < 10) {
         return `${(timeInMinutes)}:0${(remainingSeconds)}`
     }
@@ -114,57 +122,63 @@ class Album extends Component {
   render() {
     return (
       <section className="album">
-        <section id="album-info">
-          <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
-          <div className="album-details">
-            <h1 id="album-title">{this.state.album.title}</h1>
-            <h2 className="artist">{this.state.album.artist}</h2>
-            <div id="release-info">{this.state.album.releaseInfo}</div>
+        <section id="album-info" className="row">
+          <div className="col">
+            <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
           </div>
-        </section>
-        <table id="song-list">
-          <colgroup>
-            <col id="song-number-column" />
-            <col id="song-title-column" />
-            <col id="song-duration-column" />
-          </colgroup>
-          <tbody>
-            {this.state.album.songs.map( (song, index) =>
-              <tr className="song" key={index} onClick={() => this.handleSongClick(song)}
-                onMouseEnter={() => this.setState({isHovered: index+1})}
-                onMouseLeave={() => this.setState({isHovered: false})}>
-              <td className="song-actions">
-              <button id="song-action-btns" className="mdl-button mdl-js-button mdl-button--accent">
-                <i className="material-icons">play</i>
-                  { (this.state.currentSong.title === song.title) ?
-                  <span className={this.state.isPlaying ? "ion-pause" : "ion-play"}></span>
-                  :
-                  (this.state.isHovered === index+1) ?
-                  <span className="ion-play"></span>
-                  :
-                  <span className="song-number">{index+1}</span>
-                  }
-                </button>
-
-                </td>
-              <td className="song-title">{song.title}</td>
-              <td className="song-duration">{this.formatTime(song.duration)}</td>
-            </tr>
-          )}
-        </tbody>
-        </table>
-        <PlayerBar
-          isPlaying={this.state.isPlaying}
-          currentSong={this.state.currentSong}
-          currentTime={this.audioElement.currentTime}
-          duration={this.audioElement.duration}
-          formatTime={(timeInSeconds) => this.formatTime(timeInSeconds)}
-          handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-          handlePrevClick={() => this.handlePrevClick()}
-          handleNextClick={ () => this.handleNextClick()}
-          handleTimeChange={(e) => this.handleTimeChange(e)}
-        />
-      </section>
+          <div className="col">
+            <div className="album-details">
+              <h1 id="album-title" className="display-3">{this.state.album.title}</h1>
+              <h2 className="text-muted">{this.state.album.artist}</h2>
+              <div id="release-info">{this.state.album.releaseInfo}</div>
+          </div>
+        <div className="table-responsive">
+          <table id="song-list"  className="table table-hover table-bordered table-striped">
+            <colgroup>
+              <col id="song-number-column" />
+              <col id="song-title-column" />
+              <col id="song-duration-column" />
+            </colgroup>
+            <tbody>
+              {this.state.album.songs.map( (song, index) =>
+                <tr className="song" key={index} onClick={() => this.handleSongClick(song)}
+                  onMouseEnter={() => this.setState({isHovered: index+1})}
+                  onMouseLeave={() => this.setState({isHovered: false})}>
+                  <td className="song-actions">
+                    <button>
+                      { (this.state.currentSong.title === song.title) ?
+                        <span className={this.state.isPlaying ? "ion-pause" : "ion-play"}></span>
+                        :
+                      (this.state.isHovered === index+1) ?
+                        <span className="ion-play"></span>
+                        :
+                        <span className="song-number">{index+1}</span>
+                      }
+                    </button>
+                  </td>
+                  <td className="song-title">{song.title}</td>
+                  <td className="song-duration">{this.formatTime(song.duration)}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <PlayerBar
+      isPlaying={this.state.isPlaying}
+      currentSong={this.state.currentSong}
+      currentTime={this.audioElement.currentTime}
+      duration={this.audioElement.duration}
+      currentVolume={this.state.currentVolume}
+      formatTime={(timeInSeconds) => this.formatTime(timeInSeconds)}
+      handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+      handlePrevClick={() => this.handlePrevClick()}
+      handleNextClick={ () => this.handleNextClick()}
+      handleTimeChange={(e) => this.handleTimeChange(e)}
+      handleVolumeChange={(e) => this.handleVolumeChange(e)}
+    />
+  </section>
     );
   }
 }

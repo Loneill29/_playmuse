@@ -1,42 +1,74 @@
-.App {
-  text-align: center;
+body, html {
+    height: 100%;
 }
 
-nav {
-  float: left;
-  padding-left: 10px;
+#root {
+      height: 100%;
 }
 
-.nav-link {
-  padding-left: 20px;
-  paddng-right: 20px;
-  text-decoration: none;
+.bloc-jams-header {
+  max-width: 700px;
 }
 
-.nav-link:hover {
-  font-weight: bold;
-  text-shadow: grey 1px 3px 4px;
+.card-deck {
+  opacity: 0.75;
 }
 
-h1 {
-  padding-top: 50px;
-  text-align: center;
-  padding-bottom: 30px;
+.card-header {
+  height: 100px;
 }
 
-.library .album-title {
-  margin-top: 10px;
+.song-track-btn {
+  width: 40px;
+  height: 30px;
+}
+.player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 125px;
+    background: rgba(61, 61, 61, 0.3);
+    z-index: 100;
 }
 
-.library .album-pic {
-  margin-top: 30px;
+.player-bar .container {
+    display: table;
+    padding: 0;
+    width: 90%;
+    min-height: 100%;
 }
 
-#song-list {
-  padding-top: 50px;
-  padding-left: 150px;
+.player-bar .control-group {
+    display: table-row;
+    vertical-align: middle;
 }
 
-#album-cover-art {
-  float: left;
+#buttons {
+    width: 15%;
+    text-align: center;
+}
+
+#time-control {
+    width: 75%;
+    text-align: center;
+    padding-right: 1rem;
+}
+
+#volume-control {
+    width: 75%;
+    text-align: center;
+    padding-right: 1rem;
+}
+
+
+@media (max-width: 1000px) {
+    .player-bar {
+      height: 100px;
+    }
+
+    #album-cover-art {
+      height: 300px;
+      width: 300px;
+    }
 }
