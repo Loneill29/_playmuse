@@ -122,6 +122,7 @@ class Album extends Component {
   render() {
     return (
       <section className="album">
+      <img src={"/assets/images/headphones.jpg"} alt="headphones" className="background"/>
         <section id="album-info" className="row">
           <div className="col">
             <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
@@ -129,7 +130,7 @@ class Album extends Component {
           <div className="col">
             <div className="album-details">
               <h1 id="album-title" className="display-3">{this.state.album.title}</h1>
-              <h2 className="text-muted">{this.state.album.artist}</h2>
+              <h2 className="album-artist">{this.state.album.artist}</h2>
               <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
         <div className="table-responsive">
@@ -145,7 +146,7 @@ class Album extends Component {
                   onMouseEnter={() => this.setState({isHovered: index+1})}
                   onMouseLeave={() => this.setState({isHovered: false})}>
                   <td className="song-actions">
-                    <button>
+                    <button className="song-btn">
                       { (this.state.currentSong.title === song.title) ?
                         <span className={this.state.isPlaying ? "ion-pause" : "ion-play"}></span>
                         :

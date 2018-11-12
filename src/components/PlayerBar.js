@@ -5,7 +5,7 @@ class PlayerBar extends Component {
     return (
       <section className="player-bar">
         <div className="container">
-          <section id="time-control" className="control-group">
+          <section id="time-control" className="controls">
             <span className="current-time">{this.props.formatTime(this.props.currentTime)}</span>
             <input
               type="range"
@@ -18,8 +18,8 @@ class PlayerBar extends Component {
             />
             <span className="total-time">{this.props.formatTime(this.props.duration)}</span>
           </section>
-          
-          <section id="buttons" className="control-group">
+
+          <section id="buttons" className="controls">
             <button id="previous" onClick={this.props.handlePrevClick}>
               <span className="ion-skip-backward"></span>
             </button>
@@ -31,7 +31,7 @@ class PlayerBar extends Component {
             </button>
           </section>
 
-          <section id="volume-control" className="control-group">
+          <section id="volume-control" className="controls">
             <span className="icon ion-volume-low"></span>
             <input
               type="range"
