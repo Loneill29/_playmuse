@@ -82,7 +82,7 @@ a {
     vertical-align: middle;
 }
 
-.table {
+.table, .card {
   background: rgba(61, 61, 61, 0.8);
   color: #ffff;
 }
