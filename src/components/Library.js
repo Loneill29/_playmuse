@@ -20,7 +20,7 @@ class Library extends Component {
                 <img className="card-img-top" src={album.albumCover} alt={album.title} />
                 <div className="card-body">
                   <p className="display-4 library-title library-album-title">{album.title}</p>
-                  <p className="lead library-artist">{album.artist}</p>
+                  <h2 className="lead library-artist">{album.artist}</h2>
                 </div>
               </Link>
             </div>

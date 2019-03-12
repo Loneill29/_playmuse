@@ -24,6 +24,14 @@ a {
   text-decoration: none!important;
 }
 
+#album-info {
+  padding-top: 20px;
+}
+
+#album-cover-art {
+  margin-left: 20px;
+}
+
 .nav a {
   color: #ffff;
 }
@@ -32,11 +40,14 @@ a {
   text-shadow: 3px 3px 8px #ffff;
 }
 
+.playmuse {
+  margin-left: 20px;
+}
+
 @media (max-width: 1000px) {
     .player-bar {
       height: 100px;
     }
-
     #album-cover-art {
       height: 300px;
       width: 300px;
@@ -57,7 +68,8 @@ a {
 
 .card-deck {
   opacity: 0.75;
-  margin: auto;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .card-header {
@@ -95,7 +107,14 @@ a {
 .table, .card {
   background: rgba(61, 61, 61, 0.8);
   color: #ffff;
-  max-width: 800px;
+}
+
+.card {
+  max-width: 600px;
+}
+
+.table {
+  max-width: 750px;
 }
 
 #buttons {

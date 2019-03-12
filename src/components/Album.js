@@ -129,8 +129,8 @@ class Album extends Component {
           </div>
           <div className="col">
             <div className="album-details">
-              <h1 id="album-title" className="display-3">{this.state.album.title}</h1>
-              <h2 className="album-artist">{this.state.album.artist}</h2>
+              <h2 id="album-title" className="display-3">{this.state.album.title}</h2>
+              <h3 className="album-artist">{this.state.album.artist}</h3>
               <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
         <div className="table-responsive">

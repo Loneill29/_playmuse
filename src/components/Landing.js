@@ -9,17 +9,17 @@ const Landing = () => (
     <section className="card-deck mb-3 text-center">
       <div className="card box-shadow">
         <div className="card-header d-flex align-items-center h100">
-          <h2 className="font-weight-normal mx-auto landing-text">Choose your music</h2>
+          <h3 className="font-weight-normal mx-auto landing-text">Choose your music</h3>
         </div>
       </div>
       <div className="card box-shadow">
         <div className="card-header d-flex align-items-center h100">
-          <h2 className="font-weight-normal mx-auto landing-text">Unlimited, streaming, ad-free</h2>
+          <h3 className="font-weight-normal mx-auto landing-text">Unlimited, streaming, ad-free</h3>
         </div>
       </div>
       <div className="card box-shadow">
         <div className="card-header d-flex align-items-center h100">
-          <h2 className="font-weight-normal mx-auto landing-text">Mobile enabled</h2>
+          <h3 className="font-weight-normal mx-auto landing-text">Mobile enabled</h3>
         </div>
       </div>
     </section>
